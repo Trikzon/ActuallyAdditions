@@ -1,148 +1,76 @@
-buildscript {
-    repositories {
-        maven { url = 'https://files.minecraftforge.net/maven' }
-        jcenter()
-        mavenCentral()
-    }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
-    }
+plugins {
+	id 'fabric-loom' version '0.5-SNAPSHOT'
+	id 'maven-publish'
 }
 
-apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
-apply plugin: 'maven-publish'
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
-version = mod_version
-group = "de.ellpeck.actuallyadditions"
-archivesBaseName = "actuallyadditions-${mc_version}"
-
-if (System.getenv('BUILD_NUMBER') != null) {
-    version += "." + System.getenv('BUILD_NUMBER')
-}
-
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
-
-sourceSets {
-    main.resources.srcDirs += 'src/generated/resources'
-}
-
-minecraft {
-    mappings channel: "snapshot", version: mcp_version
-    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
-
-	runs {
-        client {
-            properties 'forge.logging.markers': ''
-            properties 'forge.logging.console.level': 'debug'
-            workingDirectory project.file('run')
-            mods {
-                actuallyadditions {
-                    source sourceSets.main
-                }
-            }
-        }
-        server {
-            properties 'forge.logging.markers': ''
-            properties 'forge.logging.console.level': 'debug'
-            workingDirectory project.file('run/server')
-            mods {
-                actuallyadditions {
-                    source sourceSets.main
-                }
-            }
-        }
-        data {
-            workingDirectory project.file('run/data')
-            args "--mod", "actuallyadditions", "--all", "--output", file('src/generated/resources/'), "--existing", file('src/main/resources')
-            mods {
-                actuallyadditions {
-                    source sourceSets.main
-				}
-			}
-        }
-    }
-}
-
-repositories {
-    maven {
-        name = "Progwml6 maven / JEI Maven"
-        url = "https://dvs1.progwml6.com/files/maven/"
-    }
-    maven {
-        name = "ModMaven / JEI Mirror"
-        url = "https://modmaven.k-4u.nl"
-    }
-    maven {
-        url = "https://www.cursemaven.com"
-    }
-}
+version = project.mod_version
+group = project.maven_group
+archivesBaseName = "${project.mod_id}-${project.minecraft_version}"
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-    // compile against the JEI API but do not include it at runtime
-    compileOnly fg.deobf("mezz.jei:jei-${jei_version}:api")
-    // at runtime, use the full JEI jar
-    runtimeOnly fg.deobf("mezz.jei:jei-${jei_version}")
+    // Fabric API
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+	// Compile REI API but do not include it at runtime
+	modCompileOnly "me.shedaniel:RoughlyEnoughItems-api:${project.rei_version}"
+	// At runtime, use the full REI jar
+	modRuntime "me.shedaniel:RoughlyEnoughItems:${project.rei_version}"
+	// At runtime, use the full Mod Menu jar
+	modRuntime "io.github.prospector:modmenu:${project.mod_menu_version}"
+}
 
-//    compile "curse.maven:fastworkbench:3003114"
+processResources {
+	inputs.property "version", project.version
+
+	filesMatching("fabric.mod.json") {
+		expand "version": project.version
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.encoding = "UTF-8"
+	def targetVersion = 8
+	if (JavaVersion.current().isJava9Compatible()) {
+		 it.options.release = targetVersion
+	}
+}
+
+java {
+	withSourcesJar()
 }
 
 jar {
-    manifest {
-        attributes(["Specification-Title": "actuallyadditions",
-                    "Specification-Vendor": "Ellpeck",
-                    "Specification-Version": mod_version,
-                    "Implementation-Title": project.name,
-                    "Implementation-Version": "${version}",
-                    "Implementation-Vendor" :"Ellpeck",
-                    "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")],)
-    }
+	from("LICENSE") {
+		rename { "${it}_${project.archivesBaseName}"}
+	}
 }
 
-task deobfJar(type: Jar) {
-    from(sourceSets.main.output)
-    archiveName = "${baseName}-${version}-deobf.${extension}"
-}
-
-task sourcesJar(type: Jar) {
-    from(sourceSets.main.allSource)
-    archiveName = "${baseName}-${version}-sources.${extension}"
-}
-
-artifacts {
-    archives deobfJar
-    archives sourcesJar
-}
-
+// configure the maven publication
 publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            groupId project.group
-            artifactId project.archivesBaseName
-            version project.version
-            from components.java
+	publications {
+		mavenJava(MavenPublication) {
+            groupId project.maven_group
+			artifactId project.mod_id
+			version project.mod_version
+			from components.java
 
-            artifact deobfJar {
-                classifier 'deobf'
-            }
-
-            artifact sourcesJar {
-                classifier 'sources'
-            }
-
-            pom.withXml {
-                def node = asNode()
-                if (node.dependencies.size() > 0)
-                    node.remove(node.dependencies)
-            }
-        }
-    }
-    repositories {
+			artifact(remapJar) {
+				builtBy remapJar
+			}
+			artifact(sourcesJar) {
+				builtBy remapSourcesJar
+			}
+		}
+	}
+	repositories {
         maven {
-            url "file://" + System.getenv("local_maven")
-        }
-    }
+			url "file://" + System.getenv("local_maven")
+		}
+	}
 }

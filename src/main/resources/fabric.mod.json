@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "actuallyadditions",
+  "version": "${version}",
+
+  "name": "Actually Additions",
+  "description": "Do you want Automation? Wireless Transport? Better Machines? A cup o' Coffee? Chests? Better Hoppers? Leaf Blowers? Faster Growth? Plants? Well, Actually Additions has all that and a lot more!\nTextures and Models: BootyToast, GlenthorLP, canitzp\nFabric Port: Trikzon",
+  "authors": [
+      "Ellpeck"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/actually-additions",
+    "sources": "http://github.com/Ellpeck/ActuallyAdditions"
+  },
+
+  "license": "MIT",
+  "icon": "assets/actuallyadditions/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "de.ellpeck.actuallyadditions.common.ActuallyAdditions"
+    ],
+    "client": [
+      "de.ellpeck.actuallyadditions.client.ActuallyAdditionsClient"
+    ]
+  },
+  "mixins": [
+    "actuallyadditions.common.mixins.json",
+    "actuallyadditions.client.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.7.4",
+    "fabric": "*",
+    "minecraft": "1.16.x"
+  },
+  "suggests": {
+    "rei": "*"
+  }
+}
