@@ -18,7 +18,7 @@ public class ActuallyItems {
         });
     }
 
-    private static Item add(String name, Item item) {
+    static Item add(String name, Item item) {
         ITEMS.add(new Pair<>(item, name));
         return item;
     }
