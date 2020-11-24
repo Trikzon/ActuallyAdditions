@@ -18,13 +18,13 @@ public enum ArmorMaterials implements ArmorMaterial {
     OBSIDIAN("obsidian_armor_material", 28, new int[] { 1, 3, 4, 3 }, 10, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 1, 0f, () -> Ingredient.ofItems(Items.OBSIDIAN)),
 
     // Custom resources
-    QUARTZ("quartz_armor_material", 15, new int[] { 3, 5, 6, 3 }, 8, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 1, 0f, () -> Ingredient.ofItems(ActuallyItems.BLACK_QUARTS.get())),
-    RESTONIA("restonia_armor_material", 18, new int[] { 3, 6, 7, 3 }, 9, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0, 0f, () -> Ingredient.ofItems(ActuallyItems.RESTONIA_CRYSTAL.get())),
-    PALIS("palis_armor_material", 10, new int[] { 3, 6, 7, 3 }, 10, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0, 0f, () -> Ingredient.ofItems(ActuallyItems.PALIS_CRYSTAL.get())),
-    DIAMATINE("diamatine_armor_material", 36, new int[] { 4, 7, 8, 4 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3, 0f, () -> Ingredient.ofItems(ActuallyItems.DIAMATINE_CRYSTAL.get())),
-    VOID("void_armor_material", 23, new int[] { 1, 3, 4, 1 }, 13, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0, 0f, () -> Ingredient.ofItems(ActuallyItems.VOID_CRYSTAL.get())),
-    EMERADIC("emeradic_armor_material", 32, new int[] { 6, 9, 9, 4 }, 18, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3, 0f, () -> Ingredient.ofItems(ActuallyItems.EMERADIC_CRYSTAL.get())),
-    ENORI("enori_armor_material", 24, new int[] { 3, 6, 6, 3 }, 11, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0, 0f, () -> Ingredient.ofItems(ActuallyItems.ENORI_CRYSTAL.get()));
+    QUARTZ("quartz_armor_material", 15, new int[] { 3, 5, 6, 3 }, 8, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 1, 0f, () -> Ingredient.ofItems(ActuallyItems.BLACK_QUARTZ)),
+    RESTONIA("restonia_armor_material", 18, new int[] { 3, 6, 7, 3 }, 9, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0, 0f, () -> Ingredient.ofItems(ActuallyItems.RESTONIA_CRYSTAL)),
+    PALIS("palis_armor_material", 10, new int[] { 3, 6, 7, 3 }, 10, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0, 0f, () -> Ingredient.ofItems(ActuallyItems.PALIS_CRYSTAL)),
+    DIAMATINE("diamatine_armor_material", 36, new int[] { 4, 7, 8, 4 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3, 0f, () -> Ingredient.ofItems(ActuallyItems.DIAMATINE_CRYSTAL)),
+    VOID("void_armor_material", 23, new int[] { 1, 3, 4, 1 }, 13, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0, 0f, () -> Ingredient.ofItems(ActuallyItems.VOID_CRYSTAL)),
+    EMERADIC("emeradic_armor_material", 32, new int[] { 6, 9, 9, 4 }, 18, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3, 0f, () -> Ingredient.ofItems(ActuallyItems.EMERADIC_CRYSTAL)),
+    ENORI("enori_armor_material", 24, new int[] { 3, 6, 6, 3 }, 11, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0, 0f, () -> Ingredient.ofItems(ActuallyItems.ENORI_CRYSTAL));
 
     private static final int[] BASE_DURABILITY = new int[]{13, 15, 16, 11};
     private final String name;

@@ -13,13 +13,13 @@ public enum ToolMaterials implements ToolMaterial {
     OBSIDIAN(3, 8000, 4.0f, 2.0f, 15, () -> Ingredient.ofItems(Items.OBSIDIAN)),
 
     // Custom resources
-    QUARTZ(2, 280, 6.5f, 2.0f, 10, () -> Ingredient.ofItems(ActuallyItems.BLACK_QUARTS.get())),
-    RESTONIA(2, 300, 7.0f, 2.25f, 12, () -> Ingredient.ofItems(ActuallyItems.RESTONIA_CRYSTAL.get())),
-    PALIS(2, 300, 7.0f, 2.25f, 12, () -> Ingredient.ofItems(ActuallyItems.PALIS_CRYSTAL.get())),
-    DIAMATINE(3, 1600, 9.0f, 4.0f, 14, () -> Ingredient.ofItems(ActuallyItems.DIAMATINE_CRYSTAL.get())),
-    VOID(2, 280, 6.0f, 2.0f, 8, () -> Ingredient.ofItems(ActuallyItems.VOID_CRYSTAL.get())),
-    EMERADIC(4, 2200, 9.5f, 5.55f, 18, () -> Ingredient.ofItems(ActuallyItems.EMERADIC_CRYSTAL.get())),
-    ENORI(2, 280, 6.25f, 6.25f, 15, () -> Ingredient.ofItems(ActuallyItems.ENORI_CRYSTAL.get()));
+    QUARTZ(2, 280, 6.5f, 2.0f, 10, () -> Ingredient.ofItems(ActuallyItems.BLACK_QUARTZ)),
+    RESTONIA(2, 300, 7.0f, 2.25f, 12, () -> Ingredient.ofItems(ActuallyItems.RESTONIA_CRYSTAL)),
+    PALIS(2, 300, 7.0f, 2.25f, 12, () -> Ingredient.ofItems(ActuallyItems.PALIS_CRYSTAL)),
+    DIAMATINE(3, 1600, 9.0f, 4.0f, 14, () -> Ingredient.ofItems(ActuallyItems.DIAMATINE_CRYSTAL)),
+    VOID(2, 280, 6.0f, 2.0f, 8, () -> Ingredient.ofItems(ActuallyItems.VOID_CRYSTAL)),
+    EMERADIC(4, 2200, 9.5f, 5.55f, 18, () -> Ingredient.ofItems(ActuallyItems.EMERADIC_CRYSTAL)),
+    ENORI(2, 280, 6.25f, 6.25f, 15, () -> Ingredient.ofItems(ActuallyItems.ENORI_CRYSTAL));
 
     private final int miningLevel;
     private final int itemDurability;

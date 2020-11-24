@@ -3,8 +3,6 @@ package de.ellpeck.actuallyadditions.common.items;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
 
-import java.util.function.Supplier;
-
 public final class ToolSet {
     public final Item pickaxe;
     public final Item axe;
@@ -19,22 +17,22 @@ public final class ToolSet {
     public final ToolMaterial tier;
     public final String name;
 
-    public ToolSet(String name, ToolMaterial tier, ArmorMaterial armorTier, Supplier<Item.Settings> settings) {
+    public ToolSet(String name, ToolMaterial tier, ArmorMaterial armorTier, Item.Settings settings) {
         this.name = name;
         this.tier = tier;
 
-        this.pickaxe = add("pickaxe", new PickaxeItem(tier, 1, -2.8f, settings.get()));
-        this.axe = add("axe", new AxeItem(tier, 6, -3.0f, settings.get()));
-        this.shovel = add("shovel", new ShovelItem(tier, 1, -3.0f, settings.get()));
+        this.pickaxe = add("pickaxe", new PickaxeItem(tier, 1, -2.8f, settings));
+        this.axe = add("axe", new AxeItem(tier, 6, -3.0f, settings));
+        this.shovel = add("shovel", new ShovelItem(tier, 1, -3.0f, settings));
 
         // NOTE: Forge code uses ToolMaterials.RESTONIA.getAttackDamage() + 1.0f for the attack speed for some reason.
-        this.sword = add("sword", new SwordItem(tier, 1, 3.25f, settings.get()));
-        this.hoe = add("hoe", new HoeItem(tier, 1, 3.25f, settings.get()));
+        this.sword = add("sword", new SwordItem(tier, 1, 3.25f, settings));
+        this.hoe = add("hoe", new HoeItem(tier, 1, 3.25f, settings));
 
-        this.helmet = add("helmet", new ArmorItem(armorTier, EquipmentSlot.HEAD, settings.get()));
-        this.chest = add("chest", new ArmorItem(armorTier, EquipmentSlot.CHEST, settings.get()));
-        this.leggings = add("leggings", new ArmorItem(armorTier, EquipmentSlot.LEGS, settings.get()));
-        this.boots = add("boots", new ArmorItem(armorTier, EquipmentSlot.FEET, settings.get()));
+        this.helmet = add("helmet", new ArmorItem(armorTier, EquipmentSlot.HEAD, settings));
+        this.chest = add("chest", new ArmorItem(armorTier, EquipmentSlot.CHEST, settings));
+        this.leggings = add("leggings", new ArmorItem(armorTier, EquipmentSlot.LEGS, settings));
+        this.boots = add("boots", new ArmorItem(armorTier, EquipmentSlot.FEET, settings));
     }
 
     private Item add(String name, Item item) {
