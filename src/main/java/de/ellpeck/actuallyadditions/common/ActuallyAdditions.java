@@ -1,5 +1,7 @@
 package de.ellpeck.actuallyadditions.common;
 
+import de.ellpeck.actuallyadditions.common.blocks.ActuallyBlocks;
+import de.ellpeck.actuallyadditions.common.items.ActuallyItems;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.block.Blocks;
@@ -21,6 +23,7 @@ public class ActuallyAdditions implements ModInitializer {
 
     @Override
     public void onInitialize() {
-
+        ActuallyBlocks.register();
+        ActuallyItems.register();
     }
 }
